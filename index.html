@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Product Store</title>
+    <!-- Performance Optimization: Preload critical assets -->
+    <link rel="preload" href="canvapro.webp" as="image">
+    <link rel="preload" href="capcut.webp" as="image">
+    <link rel="preload" href="whatsapp.jpg" as="image">
+    <link rel="preload" href="typing.webp" as="image">
+    <link rel="preload" href="elementor.webp" as="image">
+    <link rel="preload" href="psd.webp" as="image">
+    <link rel="preload" href="adobebundle.webp" as="image">
+    <link rel="preload" href="divi.webp" as="image">
+    <link rel="preload" href="bic.webp" as="image">
+    <link rel="preload" href="after.webp" as="image">
+    <link rel="preload" href="ytt.webp" as="image">
+    <link rel="preload" href="ai.webp" as="image">
+    <link rel="preload" href="premier.webp" as="image">
+    <link rel="preload" href="filmora.webp" as="image">
+    <link rel="preload" href="idm.webp" as="image">
+    <link rel="preload" href="office.webp" as="image">
+    <link rel="preload" href="semrush.webp" as="image">
+    <link rel="preload" href="window11.webp" as="image">
+    <link rel="preload" href="window10.webp" as="image">
+    <link rel="preload" href="inpage.webp" as="image">
+    <link rel="preload" href="qrcode.webp" as="image">
+    <link rel="preload" href="pechtree.webp" as="image">
+    <link rel="preload" href="winrar.jpg" as="image">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(rgb(77, 31, 150), rgb(191, 8, 219), rgb(214, 5, 75));
+        }
+        .product-card {
+            transition: transform 0.2s ease;
+            box-shadow: 0px 4px 8px rgb(32, 32, 32);
+            background-color: rgb(12, 52, 109);
+            color: rgb(255, 255, 255);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding: 0px;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        .product-img {
+            width: 100%;
+            height: 200px;  /* Fixed height to prevent layout shifts */
+            object-fit: contain;
+            will-change: transform;  /* Hint to browser for optimization */
+        }
+
+        .product-price {
+            font-size: 1.2em;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .contact-section {
+            margin-bottom: -70px;
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+        }
+
+        p {
+            color: rgb(28, 28, 28);
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Contact Us Section -->
+    <div class="container contact-section" id="order">
+        <div class="row p-1 ">
+            <div class="col">
+                <p class="text-white">Email: <a href="mailto:support@digitalstore.com">support@apnadeveloper.com</a></p>
+            </div>
+            <div class="col text-end">
+                <p class="text-white"><a href="tel:+923436059243">WhatsApp +92-343-6059243</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h1 class="text-center fw-bold text-white bg-danger w-100 rounded-1">Digital Product Store</h1>
+        <p class="text-center text-white">Buy 1 Time and Use Life
+            Time</p>
+        <p class="text-center text-white">We are providing Registered Software packages. We also support our customers
+            24/7.<br>Any software or tool purchased from us will have a one-year warranty.</p>
+        <a href="https://youtu.be/uHFj7yvQScE">How to Place Order</a>
+        <hr class="text-warning">
+        <!-- Search Bar -->
+        <div class="container">
+            <input type="text" id="productSearch" class="form-control" placeholder="Search for a product...">
+        </div>
+        <!-- Total Selection Summary -->
+        <div class="container my-3">
+            <div class="alert alert-info bg-light" id="selectedProductsSummary">
+                <p class="text-success"><strong>Selected Products:</strong> <span id="selectedProductsList">None</span>
+                </p>
+                <p class="text-success"><strong>Total Price:</strong> Rs.<span id="totalPrice">0</span></p>
+                <button class="btn btn-danger" id="proceedToPayment">Proceed to Payment...</button>
+            </div>
+        </div>
+        <!-- Products List -->
+        <div class="row" id="productList"></div>
+    </div>
+    <!-- Payment Form Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="paymentModalLabel">Payment Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-black">Fill in your details and payment method to complete your order.</p>
+                    <hr>
+                    <h4 class="text-center">Transfer Money: EasyPaisa: <strong>03436059243</strong></h4>
+                    <form id="paymentForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="productTitle" class="form-label">Product Titles</label>
+                                <input type="text" name="Product Titles" class="form-control" id="productTitle"
+                                    readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="productPrice" class="form-label">Total Price</label>
+                                <input type="text" name="Total Price" class="form-control" id="productPrice" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" name="Full Name" class="form-control" id="fullName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" name="Email" class="form-control" id="email" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="number" class="form-label">WhatsApp</label>
+                                <input type="number" name="number" class="form-control" id="number" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="transactionId" class="form-label">Transaction ID</label>
+                                <input type="text" class="form-control" id="transactionId"
+                                    placeholder="Enter Transaction ID from EasyPaisa" required>
+                                <small class="form-text text-muted">Please enter the transaction ID from your payment
+                                    receipt</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="paymentMethod" class="form-label">Select Payment Method</label>
+                            <select name="Payment Method" class="form-control" id="paymentMethod" required>
+                                <option value="" disabled selected>Select a payment method</option>
+                                <option value="easypaisa">EasyPaisa</option>
+                                <option value="jazzcash">JazzCash</option>
+                                <option value="nayapay">NayaPay</option>
+                                <option value="banktransfer">Bank Transfer</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-block w-100">Submit Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Order Invoice Modal -->
+    <div class="modal fade" id="orderInvoiceModal" tabindex="-1" aria-labelledby="orderInvoiceModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderInvoiceModalLabel">Order Invoice - <span
+                            id="invoiceStoreName" class="text-dark">Digital Product Store</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="orderInvoiceContent" style="color: black;">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h6><strong>Store Contact</strong></h6>
+                            <p>Email: support@apnadeveloper.com</p>
+                            <p>Phone: +92-343-6059243</p>
+                            <p>Website: www.digitalstore.apnadeveloper.com</p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <h6><strong>Order Information</strong></h6>
+                            <p id="invoiceOrderDate" class="text-dark"></p>
+                            <p id="invoiceTransactionId" class="text-dark"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <h6><strong>Customer Details</strong></h6>
+                            <div class="row">
+                                <div class="col-md-4 text-dark">
+                                    <strong>Name:</strong> <span id="invoiceCustomerName"></span>
+                                </div>
+                                <div class="col-md-4 text-dark">
+                                    <strong>Email:</strong> <span id="invoiceCustomerEmail"></span>
+                                </div>
+                                <div class="col-md-4 text-dark">
+                                    <strong>Phone:</strong> <span id="invoiceCustomerPhone"></span>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <strong>Payment Method:</strong> <span id="invoicePaymentMethod"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <h6><strong>Product Information</strong></h6>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoiceProductList">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th id="invoiceTotalPrice"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="printOrderInvoice()">Print Invoice</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Digital Product Store</h5>
+                    <p class="text-white">Your trusted source for digital software solutions</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="privacy-policy.html" class="text-white">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-white">Terms of Service</a></li>
+                        <li><a href="disclaimer.html" class="text-white">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p class="text-white">Email: support@apnadeveloper.com</p>
+                    <p class="text-white">WhatsApp: +92-343-6059243</p>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="text-white">&copy; 2025 Digital Product Store. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JavaScript (must be added before closing body tag) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const products = [
+            { title: "Canva Pro", price: 250, image: "canvapro.webp" },
+            { title: "CapCut Pro", price: 499, image: "capcut.webp" },
+            { title: "WhatsApp Marketing", price: 1500, image: "whatsapp.jpg" },
+            { title: "Typing Master Pro", price: 499, image: "typing.webp" },
+            { title: "Elementor Pro", price: 699, image: "elementor.webp" },
+            { title: "Adobe PhotoShop", price: 499, image: "psd.webp" },
+            { title: "Graphics Bundle", price: 1899, image: "adobebundle.webp" },
+            { title: "Divi Theme", price: 399, image: "divi.webp" },
+            { title: "Bulk Image Convertor", price: 399, image: "bic.webp" },
+            { title: "Adobe After Effect", price: 699, image: "after.webp" },
+            { title: "YT Thumb Downloader", price: 399, image: "ytt.webp" },
+            { title: "Adobe Illustrator", price: 799, image: "ai.webp" },
+            { title: "Adobe Premiere Pro", price: 999, image: "premier.webp" },
+            { title: "Filmora Pro", price: 999, image: "filmora.webp" },
+            { title: "IDM", price: 599, image: "idm.webp" },
+            { title: "Microsoft Office", price: 499, image: "office.webp" },
+            { title: "SemRush", price: 699, image: "semrush.webp" },
+            { title: "Window 11 Pro", price: 999, image: "window11.webp" },
+            { title: "Window 10 Pro", price: 499, image: "window10.webp" },
+            { title: "Inpage", price: 699, image: "inpage.webp" },
+            { title: "QR Code Generator", price: 499, image: "qrcode.webp" },
+            { title: "Peachtree Accounting", price: 599, image: "pechtree.webp" },
+            { title: "Winrar Pro", price: 499, image: "winrar.jpg" },
+        ];
+        const productList = document.getElementById('productList');
+        const productSearch = document.getElementById('productSearch');
+        const proceedToPaymentBtn = document.getElementById('proceedToPayment');
+        let selectedProducts = [];
+        let totalAmount = 0;
+
+        function displayProducts(filteredProducts) {
+            productList.innerHTML = '';
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'col-md-3 mb-4';
+                productCard.innerHTML = `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.title}" class="product-img">
+                        <div class="p-3">
+                            <h5>${product.title}</h5>
+                            <p class="product-price">Rs.${product.price}</p>
+                            <button class="btn btn-primary add-to-cart" data-title="${product.title}" data-price="${product.price}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+                productList.appendChild(productCard);
+            });
+
+            // Add event listeners to "Add to Cart" buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const title = this.getAttribute('data-title');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    
+                    // Check if product is already selected
+                    const existingProduct = selectedProducts.find(p => p.title === title);
+                    if (!existingProduct) {
+                        selectedProducts.push({ title, price });
+                        totalAmount += price;
+                        updateSummary();
+                        this.disabled = true;
+                        this.textContent = 'Added';
+                    }
+                });
+            });
+        }
+
+        function updateSummary() {
+            const productList = selectedProducts.map(p => p.title).join(', ') || 'None';
+            document.getElementById('selectedProductsList').innerText = productList;
+            document.getElementById('totalPrice').innerText = totalAmount;
+        }
+
+        displayProducts(products);
+
+        productSearch.addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+            const filteredProducts = products.filter(product =>
+                product.title.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filteredProducts);
+        });
+
+        proceedToPaymentBtn.addEventListener('click', function () {
+            if (selectedProducts.length === 0) {
+                alert("Please select at least one product to proceed.");
+                return;
+            }
+
+            // Populate product details in the payment modal
+            const productTitles = selectedProducts.map(p => p.title).join(', ');
+            const totalPrice = selectedProducts.reduce((sum, p) => sum + p.price, 0);
+
+            document.getElementById('productTitle').value = productTitles;
+            document.getElementById('productPrice').value = `Rs.${totalPrice}`;
+
+            // Show the payment modal
+            const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            paymentModal.show();
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Implement order submission logic here
+            alert('Order submitted successfully!');
+            // You might want to send the order details to a backend server
+        });
+
+        // Function to print the order invoice
+        function printOrderInvoice() {
+            const printContents = document.getElementById('orderInvoiceContent').innerHTML;
+            const originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload(); // Reload to restore original page
+        }
+
+        // Modify the existing form submission to show invoice
+        document.getElementById('paymentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Gather form data
+            const customerName = document.getElementById('fullName').value;
+            const customerEmail = document.getElementById('email').value;
+            const customerPhone = document.getElementById('number').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            // Get transaction ID from form
+            const transactionId = document.getElementById('transactionId').value;
+
+            // Populate invoice details
+            document.getElementById('invoiceCustomerName').textContent = customerName;
+            document.getElementById('invoiceCustomerEmail').textContent = customerEmail;
+            document.getElementById('invoiceCustomerPhone').textContent = customerPhone;
+            document.getElementById('invoicePaymentMethod').textContent = paymentMethod;
+
+            // Set order date and transaction ID
+            const currentDate = new Date().toLocaleDateString();
+            document.getElementById('invoiceOrderDate').textContent = `Date: ${currentDate}`;
+            document.getElementById('invoiceTransactionId').textContent = `Transaction ID: ${transactionId}`;
+
+            // Populate product list
+            const invoiceProductList = document.getElementById('invoiceProductList');
+            invoiceProductList.innerHTML = ''; // Clear previous entries
+
+            selectedProducts.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.title}</td>
+                    <td>Rs.${product.price}</td>
+                `;
+                invoiceProductList.appendChild(row);
+            });
+
+            // Set total price
+            document.getElementById('invoiceTotalPrice').textContent = `Rs.${totalAmount}`;
+
+            // Hide payment modal
+            const paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            paymentModal.hide();
+
+            // Show invoice modal
+            const orderInvoiceModal = new bootstrap.Modal(document.getElementById('orderInvoiceModal'));
+            orderInvoiceModal.show();
+        });
+    </script>
+</body>
+
+</html>
